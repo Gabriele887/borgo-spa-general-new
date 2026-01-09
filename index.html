@@ -1,28 +1,82 @@
-<!-- WhatsApp redirect button (0.1s delay) -->
-<button id="waBtn" type="button">Contattaci su WhatsApp</button>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Reindirizzamento a WhatsApp...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script>
-  (function () {
-    // IMPORTANT: WhatsApp requires country code. Italy = 39
-    // Your number 3520168828 -> 393520168828
-    const phone = "393520168828";
-    const text = "Salve, ho visto una vostra pubblicità per la spa, posso avere maggiori info?";
-    const delayMs = 100;
+  <!-- Redirect automatico -->
+  <script>
+    setTimeout(function () {
+      var phone = "393520168828"; // +39 3520168828
+      var message = "Salve, ho visto una vostra pubblicità per la spa, posso avere maggiori info?";
+      var url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + encodeURIComponent(message);
+      window.location.href = url;
+    }, 100); // 0.1 secondi
+  </script>
 
-    const btn = document.getElementById("waBtn");
-    if (!btn) return;
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-    btn.addEventListener("click", function () {
-      const url =
-        "https://api.whatsapp.com/send?phone=" +
-        phone +
-        "&text=" +
-        encodeURIComponent(text);
+    .box {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 320px;
+      width: 90%;
+    }
 
-      setTimeout(function () {
-        // same tab redirect
-        window.location.assign(url);
-      }, delayMs);
-    });
-  })();
-</script>
+    .logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 18px;
+      margin: 0 0 10px;
+      color: #111;
+    }
+
+    p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+
+    .spinner {
+      margin: 20px auto 0;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #ddd;
+      border-top: 4px solid #25D366;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    <h1>Ti stiamo reindirizzando su WhatsApp</h1>
+    <p>Un attimo e potrai scriverci direttamente…</p>
+    <div class="spinner"></div>
+  </div>
+
+</body>
+</html>
