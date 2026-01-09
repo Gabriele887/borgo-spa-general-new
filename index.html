@@ -1,0 +1,28 @@
+<!-- WhatsApp redirect button (0.1s delay) -->
+<button id="waBtn" type="button">Contattaci su WhatsApp</button>
+
+<script>
+  (function () {
+    // IMPORTANT: WhatsApp requires country code. Italy = 39
+    // Your number 3520168828 -> 393520168828
+    const phone = "393520168828";
+    const text = "Salve, ho visto una vostra pubblicità per la spa, posso avere maggiori info?";
+    const delayMs = 100;
+
+    const btn = document.getElementById("waBtn");
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+      const url =
+        "https://api.whatsapp.com/send?phone=" +
+        phone +
+        "&text=" +
+        encodeURIComponent(text);
+
+      setTimeout(function () {
+        // same tab redirect
+        window.location.assign(url);
+      }, delayMs);
+    });
+  })();
+</script>
